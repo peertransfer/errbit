@@ -2,10 +2,25 @@ class AppsController < ApplicationController
 
   include ProblemsSearcher
 
-  before_action :require_admin!, :except => [:index, :show]
+  before_filter :authenticate, :only => [:quick_create]
+
+  skip_before_filter :verify_authenticity_token, :only => :quick_create
+  skip_before_filter :authenticate_user!, :only => :quick_create
+
+  before_action :require_admin!, :except => [:index, :show, :quick_create]
   before_action :parse_email_at_notices_or_set_default, :only => [:create, :update]
   before_action :parse_notice_at_notices_or_set_default, :only => [:create, :update]
+
+  protect_from_forgery :except => :quick_create
   respond_to :html
+
+  def quick_create
+    app = App.where(:name =>params[:name]).first
+    if !app.present?
+      app = App.create(:name => params[:name])
+    end
+    render :text => app.api_key
+  end
 
   expose(:app_scope) {
     (current_user.admin? ? App : current_user.apps)
@@ -146,5 +161,11 @@ class AppsController < ApplicationController
   private
     def app_params
       params.require(:app).permit!
+    end
+
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == ENV['QUICK_APP_USERNAME']  && password == ENV['QUICK_APP_PASSWORD']
+      end
     end
 end

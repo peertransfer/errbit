@@ -27,6 +27,8 @@ heroku config:add GEMFILE_RUBY_VERSION=2.2.0
 heroku config:add SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:add ERRBIT_HOST=some-hostname.example.com
 heroku config:add ERRBIT_EMAIL_FROM=example@example.com
+heroku config:add QUICK_APP_USERNAME=ojete
+heroku config:add QUICK_APP_PASSWORD=moreno
 git push heroku master
 ```
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
   post '/deploys.txt' => 'deploys#create'
+  match '/app_quick_create.txt' => 'apps#quick_create', via: [:get, :post]
 
   resources :notices,   :only => [:show]
   resources :deploys,   :only => [:show]
@@ -64,4 +65,3 @@ Rails.application.routes.draw do
 
   root :to => 'apps#index'
 end
-
