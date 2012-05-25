@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Hoptoad Notifier Routes
   match '/notifier_api/v2/notices' => 'notices#create', via: [:get, :post]
   get '/locate/:id' => 'notices#locate', :as => :locate
+  post '/deploys.txt' => 'deploys#create'
+  match '/app_quick_create.txt' => 'apps#quick_create', via: [:get, :post]
 
   resources :notices, only: [:show]
   resources :users do

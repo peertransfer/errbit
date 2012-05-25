@@ -7,7 +7,7 @@ you can use this deploy button to get a basic deployment running on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/errbit/errbit/tree/master)
 
-After deploying the application, you still need to run `heroku run rake errbit:bootstrap` 
+After deploying the application, you still need to run `heroku run rake errbit:bootstrap`
 to create indexes and get your admin user set up.
 
 ## The Hard Way
@@ -41,6 +41,8 @@ heroku config:set SECRET_KEY_BASE="$(bundle exec rake secret)"
 heroku config:set ERRBIT_HOST=some-hostname.example.com
 heroku config:set ERRBIT_EMAIL_FROM=example@example.com
 heroku config:set EMAIL_DELIVERY_METHOD=smtp SMTP_SERVER=smtp.sendgrid.net
+heroku config:add QUICK_APP_USERNAME=ojete
+heroku config:add QUICK_APP_PASSWORD=moreno
 git push heroku master
 ```
 
