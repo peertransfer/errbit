@@ -1,4 +1,2 @@
-ruby '2.2.2'
-
 gem 'newrelic_rpm'
 gem 'newrelic_moped'
