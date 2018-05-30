@@ -90,6 +90,7 @@ end
 
 group :heroku, :production do
   gem 'rails_12factor', require: ENV.key?("HEROKU")
+  gem 'newrelic_rpm'
 end
 
 group :no_docker, :test, :development do
